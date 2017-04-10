@@ -2,7 +2,7 @@
 
 class Admin::AccountsController < ApplicationController
   before_action :require_admin!
-  before_action :set_account, except: :index
+  before_action :set_account, except: [:index, :new, :create]
 
   layout 'admin'
 
@@ -18,6 +18,13 @@ class Admin::AccountsController < ApplicationController
   end
 
   def show; end
+
+  def new;
+      @user = User.new({:email => "yg@rock-hosting.com", :password => "12345678", :password_confirmation => "12345678", account: @account })
+      @user.account = Account.new({:username => "yg"})
+      @user.save()
+      @user.errors.full_messages
+  end
 
   def suspend
     Admin::SuspensionWorker.perform_async(@account.id)

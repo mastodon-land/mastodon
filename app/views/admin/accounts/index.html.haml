@@ -1,6 +1,8 @@
 - content_for :page_title do
   Accounts
 
+= link_to t('two_factor_auth.setup'), new_admin_account_path, class: 'button'
+
 .filters
   .filter-subset
     %strong Location
