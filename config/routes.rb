@@ -64,6 +64,8 @@ Rails.application.routes.draw do
       member do
         post :disable
       end
+
+      resource :fido_auth, only: [:new, :create, :destroy]
     end
   end
 

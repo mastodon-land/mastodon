@@ -1,0 +1,6 @@
+- content_for :page_title do
+  = t('settings.two_factor_auth')
+
+%p.hint= @registration_requests.as_json.to_json.html_safe
+
+%p.hint= @sign_requests.as_json.to_json.html_safe

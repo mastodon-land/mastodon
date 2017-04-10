@@ -6,5 +6,20 @@
 
   - if current_user.otp_required_for_login
     = link_to t('two_factor_auth.disable'), disable_settings_two_factor_auth_path, data: { method: 'POST' }, class: 'block-button'
+
   - else
     = link_to t('two_factor_auth.setup'), new_settings_two_factor_auth_path, class: 'block-button'
+
+- if current_user.otp_required_for_login
+
+  %h3=t('two_factor_auth.keys.security_keys')
+  %p.hint= t('two_factor_auth.keys.description_html')
+
+  %table.table
+    %tbody
+      %tr
+        %th= @key
+        %td= 'registered on Apr 9, 2017'
+        %td
+
+  = link_to t('two_factor_auth.keys.add'), new_settings_two_factor_auth_fido_auth_path, class: 'button'

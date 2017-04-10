@@ -58,6 +58,8 @@ gem 'react-rails'
 gem 'browserify-rails'
 gem 'autoprefixer-rails'
 
+gem 'u2f'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'pry-rails'

@@ -5,7 +5,9 @@ class Settings::TwoFactorAuthsController < ApplicationController
 
   before_action :authenticate_user!
 
-  def show; end
+  def show
+    @key  = 'yann'
+  end
 
   def new
     redirect_to settings_two_factor_auth_path if current_user.otp_required_for_login

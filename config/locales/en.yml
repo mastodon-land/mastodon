@@ -166,6 +166,10 @@ en:
     setup: Set up
     warning: If you cannot configure an authenticator app right now, you should click "disable" or you won't be able to login.
     wrong_code: The entered code was invalid! Are server time and device time correct?
+    keys:
+      security_keys: Security keys
+      add: Register new key
+      description_html: Security keys are hardware devices that can be used as your second factor of authentication. When signing in, you press a button on the device rather than typing a verification code. Security keys use the <a target="_blank" href="https://fidoalliance.org">FIDO U2F</a> standard.
   users:
     invalid_email: The e-mail address is invalid
     invalid_otp_token: Invalid two-factor code
