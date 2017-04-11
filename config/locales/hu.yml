@@ -51,7 +51,3 @@ hu:
   settings:
     edit_profile: Profil szerkesztése
     preferences: Beállítások
-  will_paginate:
-    page_gap: "&hellip;"
-  placeholder:
-    search: Keresés
