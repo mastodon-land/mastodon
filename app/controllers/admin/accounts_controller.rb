@@ -7,12 +7,13 @@ module Admin
     def index
       @accounts = Account.alphabetic.page(params[:page])
 
-      @accounts = @accounts.local                             if params[:local].present?
-      @accounts = @accounts.remote                            if params[:remote].present?
-      @accounts = @accounts.where(domain: params[:by_domain]) if params[:by_domain].present?
-      @accounts = @accounts.silenced                          if params[:silenced].present?
-      @accounts = @accounts.recent                            if params[:recent].present?
-      @accounts = @accounts.suspended                         if params[:suspended].present?
+      @accounts = @accounts.local                                                               if params[:local].present?
+      @accounts = @accounts.remote                                                              if params[:remote].present?
+      @accounts = @accounts.where(domain: params[:by_domain])                                   if params[:by_domain].present?
+      @accounts = @accounts.where('LOWER(username) LIKE LOWER(?)', "%#{params[:by_username]}%") if params[:by_username].present?
+      @accounts = @accounts.silenced                                                            if params[:silenced].present?
+      @accounts = @accounts.recent                                                              if params[:recent].present?
+      @accounts = @accounts.suspended                                                           if params[:suspended].present?
     end
 
     def show; end
