@@ -115,4 +115,54 @@ RSpec.describe Admin::AccountsController, type: :controller do
       expect(Account.find_by(username: 'bob').silenced).to be false
     end
   end
+
+  describe 'GET #edit' do
+    it 'returns http success' do
+      get :edit, params: { id: bob.id }
+      expect(response).to have_http_status(:success)
+    end
+  end
+
+  describe 'POST #update email only' do
+    let(:user) { Fabricate(:user, email: 'bob@example.com', account: bob) }
+
+    before do
+      request.env["devise.mapping"] = Devise.mappings[:user]
+      post :update,  params: { id: user.account.id, user: { email: 'newbob@example.com' } }
+    end
+
+    it 'redirects to account page' do
+      expect(response).to redirect_to admin_account_url(user.account.id)
+    end
+
+    it 'saved mail' do
+      expect(User.find_by(id: user.id).email).to eq('newbob@example.com')
+    end
+  end
+
+  describe 'POST #update with password' do
+    let(:user) { Fabricate(:user, email: 'bob@example.com', account: bob) }
+
+    before do
+      request.env["devise.mapping"] = Devise.mappings[:user]
+      post :update,  params: { id: user.account.id, user: { password: '12345678', password_confirmation: '12345678' } }
+    end
+
+    it 'redirects to account page' do
+      expect(response).to redirect_to admin_account_url(user.account.id)
+    end
+  end
+
+  describe 'POST #update with password confirmation error' do
+    let(:user) { Fabricate(:user, email: 'bob@example.com', account: bob) }
+
+    before do
+      request.env["devise.mapping"] = Devise.mappings[:user]
+      post :update,  params: { id: user.account.id, user: { password: '12345678', password_confirmation: '123456789' } }
+    end
+
+    it 'stay on edit page' do
+      expect(response).to have_http_status(:success)
+    end
+  end
 end

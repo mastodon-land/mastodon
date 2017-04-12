@@ -230,5 +230,7 @@ en:
         title: Create account
         success: Account has been created successfully
         description_html: After confirming their email, the user will need to reset their password to be able to login. It can be done by using 'Forgot your password?' method.
+      change_password: Credentials
+      set_new_password: Update
   placeholder:
     search: Chercher

@@ -225,5 +225,7 @@ fr:
         title: Créer un nouveau compte
         success: Nouveau compte créé avec succès
         description_html: Après avoir confirmé son email l'utilisateur devra reinitialiser son mot de passe pour accéder au site. Pour cela il peut utiliser la méthode 'Réinitialiser le mot de passe'.
+      change_password: Mot de passe
+      set_new_password: Sauvegarder
   placeholder:
     search: Chercher
