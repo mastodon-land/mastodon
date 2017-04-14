@@ -56,66 +56,6 @@ RSpec.describe Admin::AccountsController, type: :controller do
     end
   end
 
-  describe 'POST #suspend' do
-    before do
-      bob.update(suspended: false)
-      post :suspend, params: { id: bob.id }
-    end
-
-    it 'redirects to accounts list page' do
-      expect(response).to redirect_to admin_accounts_path
-    end
-
-    it 'suspended user' do
-      expect(Account.find_by(username: 'bob').suspended).to be true
-    end
-  end
-
-  describe 'POST #unsuspend' do
-    before do
-      bob.update(suspended: true)
-      post :unsuspend, params: { id: bob.id }
-    end
-
-    it 'redirects to accounts list page' do
-      expect(response).to redirect_to admin_accounts_path
-    end
-
-    it 'unsuspended user' do
-      expect(Account.find_by(username: 'bob').suspended).to be false
-    end
-  end
-
-  describe 'POST #silence' do
-    before do
-      bob.update(silenced: false)
-      post :silence, params: { id: bob.id }
-    end
-
-    it 'redirects to accounts list page' do
-      expect(response).to redirect_to admin_accounts_path
-    end
-
-    it 'suspended user' do
-      expect(Account.find_by(username: 'bob').silenced).to be true
-    end
-  end
-
-  describe 'POST #unsilence' do
-    before do
-      bob.update(silenced: true)
-      post :unsilence, params: { id: bob.id }
-    end
-
-    it 'redirects to accounts list page' do
-      expect(response).to redirect_to admin_accounts_path
-    end
-
-    it 'unsilenced user' do
-      expect(Account.find_by(username: 'bob').silenced).to be false
-    end
-  end
-
   describe 'GET #edit' do
     it 'returns http success' do
       get :edit, params: { id: bob.id }

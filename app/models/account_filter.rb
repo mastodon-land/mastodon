@@ -23,6 +23,8 @@ class AccountFilter
       Account.remote
     when /by_domain/
       Account.where(domain: value)
+    when /by_username/
+      Account.where('LOWER(username) LIKE LOWER(?)', "%#{params[:by_username]}%")
     when /silenced/
       Account.silenced
     when /recent/
