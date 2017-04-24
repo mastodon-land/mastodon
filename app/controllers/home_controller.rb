@@ -1,14 +1,9 @@
 # frozen_string_literal: true
 
 class HomeController < ApplicationController
-  protect_from_forgery except: :streaming
   before_action :authenticate_user!
 
   def index
-    @body_classes = 'app-body'
-  end
-
-  def streaming
     @body_classes           = 'app-body'
     @token                  = find_or_create_access_token.token
     @web_settings           = Web::Setting.find_by(user: current_user)&.data || {}
