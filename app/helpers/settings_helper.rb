@@ -3,11 +3,12 @@
 module SettingsHelper
   HUMAN_LOCALES = {
     en: 'English',
-    ar: 'عربى',
+    ar: 'العربية',
     bg: 'Български',
     de: 'Deutsch',
     eo: 'Esperanto',
     es: 'Español',
+    fa: 'فارسی',
     fi: 'Suomi',
     fr: 'Français',
     hr: 'Hrvatski',

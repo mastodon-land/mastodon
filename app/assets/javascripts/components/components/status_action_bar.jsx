@@ -11,11 +11,8 @@ const messages = defineMessages({
   block: { id: 'account.block', defaultMessage: 'Block @{name}' },
   reply: { id: 'status.reply', defaultMessage: 'Reply' },
   replyAll: { id: 'status.replyAll', defaultMessage: 'Reply to thread' },
-  reblog: { id: 'status.reblog', defaultMessage: 'Reblog' },
-  cannot_reblog: { id: 'status.cannot_reblog', defaultMessage: 'This post cannot be reblogged' },
-  unreblog: { id: 'status.unreblog', defaultMessage: 'Undo boost' },
-  direct: { id: 'status.direct', defaultMessage: 'Direct' },
-  private: { id: 'status.private', defaultMessage: 'Private' },
+  reblog: { id: 'status.reblog', defaultMessage: 'Boost' },
+  cannot_reblog: { id: 'status.cannot_reblog', defaultMessage: 'This post cannot be boosted' },
   favourite: { id: 'status.favourite', defaultMessage: 'Favourite' },
   open: { id: 'status.open', defaultMessage: 'Expand this status' },
   report: { id: 'status.report', defaultMessage: 'Report @{name}' }
@@ -107,11 +104,11 @@ class StatusActionBar extends React.PureComponent {
     return (
       <div className='status__action-bar'>
         <div className='status__action-bar-button-wrapper'><IconButton title={reply_title} icon={reply_icon} onClick={this.handleReplyClick} /></div>
-        <div className='status__action-bar-button-wrapper'><IconButton disabled={reblog_disabled} active={status.get('reblogged')} title={reblog_disabled ? intl.formatMessage(messages.cannot_reblog) : (status.get('visibility') === 'direct' ? intl.formatMessage(messages.direct) : (status.get('visibility') === 'private' ? intl.formatMessage(messages.private) : (status.get('reblogged') ? intl.formatMessage(messages.unreblog) : intl.formatMessage(messages.reblog))))} icon={reblogIcon} onClick={this.handleReblogClick} /></div>
+        <div className='status__action-bar-button-wrapper'><IconButton disabled={reblog_disabled} active={status.get('reblogged')} title={reblog_disabled ? intl.formatMessage(messages.cannot_reblog) : intl.formatMessage(messages.reblog)} icon={reblogIcon} onClick={this.handleReblogClick} /></div>
         <div className='status__action-bar-button-wrapper'><IconButton animate={true} active={status.get('favourited')} title={intl.formatMessage(messages.favourite)} icon='star' onClick={this.handleFavouriteClick} className='star-icon' /></div>
 
         <div className='status__action-bar-dropdown'>
-          <DropdownMenu items={menu} icon='ellipsis-h' size={18} direction="right" />
+          <DropdownMenu items={menu} icon='ellipsis-h' size={18} direction="right" ariaLabel="More"/>
         </div>
       </div>
     );

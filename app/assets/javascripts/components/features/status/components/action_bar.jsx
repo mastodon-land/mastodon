@@ -8,10 +8,8 @@ const messages = defineMessages({
   delete: { id: 'status.delete', defaultMessage: 'Delete' },
   mention: { id: 'status.mention', defaultMessage: 'Mention @{name}' },
   reply: { id: 'status.reply', defaultMessage: 'Reply' },
-  reblog: { id: 'status.reblog', defaultMessage: 'Reblog' },
-  unreblog: { id: 'status.unreblog', defaultMessage: 'Undo boost' },
-  direct: { id: 'status.direct', defaultMessage: 'Direct' },
-  private: { id: 'status.private', defaultMessage: 'Private' },
+  reblog: { id: 'status.reblog', defaultMessage: 'Boost' },
+  cannot_reblog: { id: 'status.cannot_reblog', defaultMessage: 'This post cannot be boosted' },
   favourite: { id: 'status.favourite', defaultMessage: 'Favourite' },
   report: { id: 'status.report', defaultMessage: 'Report @{name}' }
 });
@@ -70,12 +68,14 @@ class ActionBar extends React.PureComponent {
     if (status.get('visibility') === 'direct') reblogIcon = 'envelope';
     else if (status.get('visibility') === 'private') reblogIcon = 'lock';
 
+    let reblog_disabled = (status.get('visibility') === 'direct' || status.get('visibility') === 'private');
+
     return (
       <div className='detailed-status__action-bar'>
         <div className='detailed-status__button'><IconButton title={intl.formatMessage(messages.reply)} icon={status.get('in_reply_to_id', null) === null ? 'reply' : 'reply-all'} onClick={this.handleReplyClick} /></div>
-        <div className='detailed-status__button'><IconButton disabled={status.get('visibility') === 'direct' || status.get('visibility') === 'private'} active={status.get('reblogged')} title={status.get('visibility') === 'direct' ? intl.formatMessage(messages.direct) : (status.get('visibility') === 'private' ? intl.formatMessage(messages.private) : (status.get('reblogged') ? intl.formatMessage(messages.unreblog) : intl.formatMessage(messages.reblog)))} icon={reblogIcon} onClick={this.handleReblogClick} /></div>
+        <div className='detailed-status__button'><IconButton disabled={reblog_disabled} active={status.get('reblogged')} title={reblog_disabled ? intl.formatMessage(messages.cannot_reblog) : intl.formatMessage(messages.reblog)} icon={reblogIcon} onClick={this.handleReblogClick} /></div>
         <div className='detailed-status__button'><IconButton animate={true} active={status.get('favourited')} title={intl.formatMessage(messages.favourite)} icon='star' onClick={this.handleFavouriteClick} activeStyle={{ color: '#ca8f04' }} /></div>
-        <div className='detailed-status__button'><DropdownMenu size={18} icon='ellipsis-h' items={menu} direction="left" /></div>
+        <div className='detailed-status__button'><DropdownMenu size={18} icon='ellipsis-h' items={menu} direction="left" ariaLabel="More" /></div>
       </div>
     );
   }
