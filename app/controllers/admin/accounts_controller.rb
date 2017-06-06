@@ -58,7 +58,11 @@ module Admin
         :by_username,
         :silenced,
         :recent,
-        :suspended
+        :suspended,
+        :username,
+        :display_name,
+        :email,
+        :ip
       )
     end
 
